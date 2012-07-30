@@ -20,18 +20,36 @@
             <h1>Won With Wit</h1>
         </div><!-- /header -->
 
-        <div data-role="content">	
+        <div data-role="content">
+
 		    <p>Welcome! Make yourself comfortable</p>
 		    <div data-role="collapsible-set">
 	            <div data-role="collapsible" data-collapsed="false">
 	                <h3>Sign In:</h3>
-	                <p>I'm the collapsible set content for section 1.</p>
+	                <form action="form.php" method="post">
+	                    <div data-role="fieldcontain" id="signinForm">
+	                    	<label for="unameEmail">Username/Email:</label>
+	                    	<input type="text" name="unameEmail" id="unameEmail" value="">
+	                    	<label for="pword">Password:</label>
+	                    	<input type="text" name="pword" id="pword" value="">	                    	
+	                    </div>
+	                </form>
 	            </div>
 	            <div data-role="collapsible">
 	                <h3>New to the game? Sign Up!</h3>
-	                <p>I'm the collapsible set content for section 2.</p>
+	                <form action="form.php" method="post">
+	                    <div data-role="fieldcontain" id="registerForm">
+	                    	<label for="email">Your Email:</label>
+	                    	<input type="text" name="email" id="email" value="">
+	                    	<label for="uname">Your New Username:</label>
+	                    	<input type="text" name="uname" id="uname" value="">
+	                    	<label for="pword">Create Password:</label>
+	                    	<input type="text" name="pword" id="pword" value="">                   	
+	                    </div>
+	                </form>
 	            </div>	
-            </div>		
+            </div>
+            		
 	    </div><!-- /content -->
 
     </div><!-- /page -->
