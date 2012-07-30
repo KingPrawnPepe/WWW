@@ -1,3 +1,5 @@
+var serviceURL = "http://concentratedblend.com/www-services/";
+
 function init() {
     document.addEventListener("deviceready", deviceReady, true);
     delete init;
@@ -21,7 +23,7 @@ function handleLogin() {
     var p = $("#pword", form).val();
     console.log("click");
     if(u != '' && p!= '') {
-        $.post("http://www.coldfusionjedi.com/demos/2011/nov/10/service.cfc?method=login&returnformat=json", {username:u,password:p}, function(res) {
+        $.post(serviceURL +'signIn.php', {username:u,password:p}, function(res) {
             if(res == true) {
                 //store
                 window.localStorage["unameEmail"] = u;
