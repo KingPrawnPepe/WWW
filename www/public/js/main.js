@@ -1,47 +1,47 @@
 function init() {
-document.addEventListener("deviceready", deviceReady, true);
-delete init;
+    document.addEventListener("deviceready", deviceReady, true);
+    delete init;
 }
 
 
 function checkPreAuth() {
-    var form = $("#loginForm");
-    if(window.localStorage["username"] != undefined && window.localStorage["password"] != undefined) {
-        $("#username", form).val(window.localStorage["username"]);
-        $("#password", form).val(window.localStorage["password"]);
+    var form = $("#signinForm");
+    if(window.localStorage["unameEmail"] != undefined && window.localStorage["pword"] != undefined) {
+        $("#unameEmail", form).val(window.localStorage["unameEmail"]);
+        $("#pword", form).val(window.localStorage["pword"]);
         handleLogin();
     }
 }
 
 function handleLogin() {
-    var form = $("#loginForm");    
+    var form = $("#signinForm");    
     //disable the button so we can't resubmit while we wait
-    $("#submitButton",form).attr("disabled","disabled");
-    var u = $("#username", form).val();
-    var p = $("#password", form).val();
+    $("#signinButton",form).attr("disabled","disabled");
+    var u = $("#unameEmail", form).val();
+    var p = $("#pword", form).val();
     console.log("click");
     if(u != '' && p!= '') {
         $.post("http://www.coldfusionjedi.com/demos/2011/nov/10/service.cfc?method=login&returnformat=json", {username:u,password:p}, function(res) {
             if(res == true) {
                 //store
-                window.localStorage["username"] = u;
-                window.localStorage["password"] = p;             
+                window.localStorage["unameEmail"] = u;
+                window.localStorage["pword"] = p;             
                 $.mobile.changePage("some.html");
             } else {
                 navigator.notification.alert("Your login failed", function() {});
             }
-         $("#submitButton").removeAttr("disabled");
+         $("#signinButton").removeAttr("disabled");
         },"json");
     } else {
         //Thanks Igor!
         navigator.notification.alert("You must enter a username and password", function() {});
-        $("#submitButton").removeAttr("disabled");
+        $("#signinButton").removeAttr("disabled");
     }
     return false;
 }
 
 function deviceReady() {
     
-$("#loginForm").on("submit",handleLogin);
+    $("#signinForm").on("submit",handleLogin);
 
 }

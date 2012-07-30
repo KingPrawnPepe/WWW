@@ -13,8 +13,8 @@
 
 </head>
 
-<body>
-	<div data-role="page">
+<body onload="init()">
+	<div data-role="page" id="signinUpPage">
 
         <div data-role="header">
             <h1>Won With Wit</h1>
@@ -26,19 +26,20 @@
 		    <div data-role="collapsible-set">
 	            <div data-role="collapsible" data-collapsed="false">
 	                <h3>Sign In:</h3>
-	                <form action="form.php" method="post">
-	                    <div data-role="fieldcontain" id="signinForm">
+	                <form action="form.php" method="post" id="signinForm">
+	                    <div data-role="fieldcontain">
 	                    	<label for="unameEmail">Username/Email:</label>
 	                    	<input type="text" name="unameEmail" id="unameEmail" value="">
 	                    	<label for="pword">Password:</label>
-	                    	<input type="text" name="pword" id="pword" value="">	                    	
+	                    	<input type="text" name="pword" id="pword" value="">                    	
 	                    </div>
+	                    <input type="submit" value="Sign In" id="signinButton">
 	                </form>
 	            </div>
 	            <div data-role="collapsible">
 	                <h3>New to the game? Sign Up!</h3>
-	                <form action="form.php" method="post">
-	                    <div data-role="fieldcontain" id="registerForm">
+	                <form action="form.php" method="post" id="registerForm">
+	                    <div data-role="fieldcontain">
 	                    	<label for="email">Your Email:</label>
 	                    	<input type="text" name="email" id="email" value="">
 	                    	<label for="uname">Your New Username:</label>
@@ -49,10 +50,16 @@
 	                </form>
 	            </div>	
             </div>
-            		
+
 	    </div><!-- /content -->
 
     </div><!-- /page -->
+
+    <script>
+        $("#signinUpPage").live("pageinit", function(e) {
+            checkPreAuth();
+        });
+    </script>
 </body>
 
 </html>
