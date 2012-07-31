@@ -15,7 +15,8 @@ function checkPreAuth() {
     }
 }
 
-function handleLogin() {
+function handleLogin(e) {
+    //e.preventDefault();
     var form = $("#signinForm");    
     //disable the button so we can't resubmit while we wait
     $("#signinButton",form).attr("disabled","disabled");
@@ -28,7 +29,7 @@ function handleLogin() {
                 //store
                 window.localStorage["unameEmail"] = u;
                 window.localStorage["pword"] = p;             
-                $.mobile.changePage("some.html");
+                $.mobile.changePage("home.html");
             } else {
                 navigator.notification.alert("Your login failed", function() {});
             }
@@ -43,7 +44,7 @@ function handleLogin() {
 }
 
 function deviceReady() {
-    
+    console.log('device ready');
     $("#signinForm").on("submit",handleLogin);
 
 }
