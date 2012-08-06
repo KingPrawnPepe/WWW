@@ -1,11 +1,11 @@
-/*** PHONEGAP VERSION of WWW 
-This is the JS for the phonegap version of the game. 
+/*** WEB VERSION of WWW 
+This is the JS for the web only version of the game. 
 ***/
 
 var serviceURL = "http://concentratedblend.com/www-services/";
 
 function init() {
-    document.addEventListener("deviceready", deviceReady, true);
+    $(document).ready(domReady);
     delete init;
 }
 
@@ -41,14 +41,14 @@ function handleLogin() {
         },"json");
     } else {
         //Thanks Igor!
-        navigator.notification.alert("You must enter a username and password", function() {});
+        alert("You must enter a username and password");
         $("#signinButton").removeAttr("disabled");
     }
     return false;
 }
 
-function deviceReady() {
-    console.log('device ready');
+function domReady() {
+    console.log('the dom is ready, sire');
     $("#signinForm").on("submit",handleLogin);
 
 }

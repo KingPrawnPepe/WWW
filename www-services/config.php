@@ -1,8 +1,8 @@
 <?php
 	
-	$dbhost = '127.0.0.1';
-	$dbuser = 'root';
-	$dbpass = '';
-	$dbname = 'directory';
+	$dbhost = 'localhost';
+	$dbuser = 'il062_IanLind';
+	$dbpass = 'endure1223yip';
+	$dbname = 'il062_www-v1';
 
 ?>
