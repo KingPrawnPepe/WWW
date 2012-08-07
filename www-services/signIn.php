@@ -2,15 +2,18 @@
 include 'config.php';
 
 //recieve the info, set vars
-$uname = $_POST['uname'];
-$pword = $_POST['pword'];
-$email = $_POST['email'];
+$uname = $_POST['username'];
+$pword = $_POST['password'];
+//$email = $_POST['email'];
 
-if (isset($_POST['uname']) == TRUE && isset($_POST['pword']) == TRUE ) {
+//check the username and password for a match for sign-in
 
-    $sql = "select uName, pWord, id " . 
-		"from users where uName = '' " .
-		"group by e.id order by e.lastName, e.firstName";
+if (isset($_POST['username']) == TRUE && isset($_POST['password']) == TRUE ) {
+
+    //$safeUname = mysql_real_escape_string($uname) ;
+	//$safePword = md5($pword) ;
+    $sql = "select uname, pword, id " . 
+		"from users where uname = '$uname' and pword = '$pword' " ;
 
     try {
 	    $dbh = new PDO("mysql:host=$dbhost;dbname=$dbname", $dbuser, $dbpass);	

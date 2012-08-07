@@ -28,8 +28,8 @@ function handleLogin() {
     var p = $("#pword", form).val();
     console.log("click");
     if(u != '' && p!= '') {
-        $.post(serviceURL +'signIn.php', {username:u,password:p}, function(res) {
-            if(res == true) {
+        $.post(serviceURL +'signIn.php', {username:u,password:p}, function(data) {
+            if(data.items.length !== 0) {
                 //store
                 window.localStorage["unameEmail"] = u;
                 window.localStorage["pword"] = p;             
