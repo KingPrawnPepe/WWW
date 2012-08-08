@@ -48,8 +48,18 @@ function handleLogin() {
     return false;
 }
 
+function handleLogout() {
+    window.localStorage.removeItem("unameEmail");
+    window.localStorage.removeItem("pword");
+    $.mobile.changePage("index.html");
+}
+
 function domReady() {
     console.log('the dom is ready, sire');
     $("#signinForm").on("submit",handleLogin);
+}
 
+function initUtils() {
+    console.log('initUtils fired');
+   $("#logOutBtn").click(handleLogout);
 }
