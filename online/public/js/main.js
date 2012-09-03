@@ -3,11 +3,12 @@ This is the JS for the web only version of the game.
 ***/
 
 var serviceURL = "http://concentratedblend.com/www-services/";
+var currentPage;
 
-function test() {
-    console.log('this was run when the page first loaded');
+function domInit() {
+    //console.log('this was run when the page first loaded');
     checkPreAuth();
-    delete test;
+    delete domInit;
 }
 
 window.addEventListener('load', function () { 
@@ -19,24 +20,26 @@ window.addEventListener('load', function () {
 
 
 function checkPreAuth(event) {
-    //var form = $("#signinForm");
-    //console.log($.mobile.activePage.attr("id"));
+    currentPage = $.mobile.activePage.attr("id");
     if(window.localStorage["unameEmail"] != undefined && window.localStorage["pword"] != undefined) {
-        $("#logOutBtn").click(handleLogout);
-        //$("#unameEmail", form).val(window.localStorage["unameEmail"]);
-        //$("#pword", form).val(window.localStorage["pword"]);
-        //handleLogin();
-        console.log('logged in!');
-        $(this).trigger('pageshow');
+        console.log('log in check passed');
+        if (currentPage == 'signinUpPage') {
+            $.mobile.changePage("home.html");
+        }
+        else {
+            $("#logOutBtn").click(handleLogout);
+            $(this).trigger('pageshow');
+        }
     }
     else {
         console.log('User is not logged in. Kick to homepage!');
-        $.mobile.changePage("index.html");
+        if (currentPage != 'signinUpPage') {
+            $.mobile.changePage("index.html");
+        }
     }
 }
 
 function handleLogin() {
-    //e.preventDefault();
     var form = $("#signinForm");    
     //disable the button so we can't resubmit while we wait
     $("#signinButton",form).attr("disabled","disabled");
@@ -46,7 +49,7 @@ function handleLogin() {
     if(u != '' && p!= '') {
         $.post(serviceURL +'signIn.php', {username:u,password:p}, function(data) {
             if(data.items.length !== 0) {
-                //store
+                //store the sign-in check vars
                 console.log('the reply happened');
                 window.localStorage["unameEmail"] = u;
                 window.localStorage["pword"] = p;             
@@ -57,7 +60,6 @@ function handleLogin() {
          $("#signinButton").removeAttr("disabled");
         },"json");
     } else {
-        //Thanks Igor!
         alert("You must enter a username and password");
         $("#signinButton").removeAttr("disabled");
     }
@@ -70,12 +72,6 @@ function handleLogout() {
     $.mobile.changePage("index.html");
 }
 
-function domReady() {
-    console.log('the dom is ready, sire');
-    //initUtils();
-    //$("#signinForm").on("submit",handleLogin);
-}
-
 $('#signinUpPage').live('pageshow', function(event) {
     console.log('sign up page run');
     $("#signinForm").on("submit",handleLogin);
@@ -84,15 +80,4 @@ $('#signinUpPage').live('pageshow', function(event) {
 $('#homePage').live('pageshow', function(event) {
     console.log('home page code here');
 });
-
-/*function initUtils() {
-    console.log('initUtils fired');
-    checkPreAuth();
-   //$("#logOutBtn").click(handleLogout);
-}*/
-
-/*$(document).bind( 'pagebeforeshow',function(event){
-     console.log('the next page is about to be shown');
-     //initUtils();
-});*/
 
