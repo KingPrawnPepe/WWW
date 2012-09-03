@@ -73,12 +73,12 @@ function handleLogout() {
     $.mobile.changePage("index.html");
 }
 
-$('#signinUpPage').live('pageshow', function(event) {
+$(document).on('pageshow', '#signinUpPage', function(event) {
     console.log('sign up page run');
     $("#signinForm").on("submit",handleLogin);
 });
 
-$('#homePage').live('pageshow', function(event) {
+$(document).on('pageshow', '#homePage', function(event) {
     console.log('home page code here');
 });
 
