@@ -21,7 +21,7 @@ window.addEventListener('load', function () {
 
 function checkPreAuth(event) {
     currentPage = $.mobile.activePage.attr("id");
-    if(window.localStorage["unameEmail"] != undefined && window.localStorage["pword"] != undefined) {
+    if(window.localStorage["uName"] != undefined && window.localStorage["uId"] != undefined) {
         console.log('log in check passed');
         if (currentPage == 'signinUpPage') {
             $.mobile.changePage("home.html");
@@ -32,8 +32,8 @@ function checkPreAuth(event) {
         }
     }
     else {
-        console.log('User is not logged in. Kick to homepage!');
         if (currentPage != 'signinUpPage') {
+            alert("Sorry, you must be logged in to access that page");
             $.mobile.changePage("index.html");
         }
     }
@@ -45,16 +45,17 @@ function handleLogin() {
     $("#signinButton",form).attr("disabled","disabled");
     var u = $("#unameEmail", form).val();
     var p = $("#pword", form).val();
-    console.log("click");
     if(u != '' && p!= '') {
         $.post(serviceURL +'signIn.php', {username:u,password:p}, function(data) {
             if(data.items.length !== 0) {
                 //store the sign-in check vars
-                console.log('the reply happened');
-                window.localStorage["unameEmail"] = u;
-                window.localStorage["pword"] = p;             
+                window.localStorage["uName"] = data.items[0].uname;
+                window.localStorage["uId"] = data.items[0].id;             
                 $.mobile.changePage("home.html");
             } else {
+                alert("Whoops! That username or password doesn't match our records. Try again.");
+                $("#unameEmail", form).val("");
+                $("#pword", form).val("");
                 console.log(data);
             }
          $("#signinButton").removeAttr("disabled");
@@ -67,8 +68,8 @@ function handleLogin() {
 }
 
 function handleLogout() {
-    window.localStorage.removeItem("unameEmail");
-    window.localStorage.removeItem("pword");
+    window.localStorage.removeItem("uName");
+    window.localStorage.removeItem("uId");
     $.mobile.changePage("index.html");
 }
 
