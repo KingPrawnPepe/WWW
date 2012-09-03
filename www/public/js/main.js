@@ -4,18 +4,33 @@ This is the JS for the phonegap version of the game.
 
 var serviceURL = "http://concentratedblend.com/www-services/";
 
-function init() {
+/*function init() {
     document.addEventListener("deviceready", deviceReady, true);
     delete init;
-}
+}*/
+
+window.addEventListener('load', function () {
+    document.addEventListener('deviceready', function () {
+        console.log('device ready');
+        $(document).bind( 'pagebeforeshow',function(event){
+            //initUtils();
+            checkPreAuth();
+        });
+    }, false);
+}, false);
 
 
 function checkPreAuth() {
-    var form = $("#signinForm");
-    if(window.localStorage["unameEmail"] != undefined && window.localStorage["pword"] != undefined) {
-        $("#unameEmail", form).val(window.localStorage["unameEmail"]);
-        $("#pword", form).val(window.localStorage["pword"]);
-        handleLogin();
+    //var form = $("#signinForm");
+    if(window.localStorage["unameEmail"] != undefined && window.localStorage["loggedIn"] == true) {
+        //$("#unameEmail", form).val(window.localStorage["unameEmail"]);
+        //$("#pword", form).val(window.localStorage["pword"]);
+        //handleLogin();
+        console.log('logged in! the page you need to run function is');
+
+    }
+    else if (window.localStorage["loggedIn"] != true) {
+        console.log('User is not logged in. Kick to homepage!');
     }
 }
 
@@ -32,7 +47,7 @@ function handleLogin() {
             if(data.items.length !== 0) {
                 //store
                 window.localStorage["unameEmail"] = u;
-                window.localStorage["pword"] = p;             
+                window.localStorage["loggedIn"] = true;             
                 $.mobile.changePage("home.html");
             } else {
                 navigator.notification.alert("Your login failed", function() {});
@@ -47,8 +62,14 @@ function handleLogin() {
     return false;
 }
 
-function deviceReady() {
+/*function deviceReady() {
     console.log('device ready');
     $("#signinForm").on("submit",handleLogin);
 
-}
+}*/
+
+/*function initUtils() {
+    console.log('initUtils fired');
+    checkPreAuth();
+   //$("#logOutBtn").click(handleLogout);
+}*/

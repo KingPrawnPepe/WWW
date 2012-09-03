@@ -4,18 +4,34 @@ This is the JS for the web only version of the game.
 
 var serviceURL = "http://concentratedblend.com/www-services/";
 
-function init() {
-    $(document).ready(domReady);
-    delete init;
+function test() {
+    console.log('this was run when the page first loaded');
+    checkPreAuth();
+    delete test;
 }
 
+window.addEventListener('load', function () { 
+    $(document).bind( 'pagebeforeshow',function(event){
+        event.preventDefault();
+        checkPreAuth();
+    }); 
+}, false);
 
-function checkPreAuth() {
-    var form = $("#signinForm");
+
+function checkPreAuth(event) {
+    //var form = $("#signinForm");
+    //console.log($.mobile.activePage.attr("id"));
     if(window.localStorage["unameEmail"] != undefined && window.localStorage["pword"] != undefined) {
-        $("#unameEmail", form).val(window.localStorage["unameEmail"]);
-        $("#pword", form).val(window.localStorage["pword"]);
-        handleLogin();
+        $("#logOutBtn").click(handleLogout);
+        //$("#unameEmail", form).val(window.localStorage["unameEmail"]);
+        //$("#pword", form).val(window.localStorage["pword"]);
+        //handleLogin();
+        console.log('logged in!');
+        $(this).trigger('pageshow');
+    }
+    else {
+        console.log('User is not logged in. Kick to homepage!');
+        $.mobile.changePage("index.html");
     }
 }
 
@@ -56,10 +72,27 @@ function handleLogout() {
 
 function domReady() {
     console.log('the dom is ready, sire');
-    $("#signinForm").on("submit",handleLogin);
+    //initUtils();
+    //$("#signinForm").on("submit",handleLogin);
 }
 
-function initUtils() {
+$('#signinUpPage').live('pageshow', function(event) {
+    console.log('sign up page run');
+    $("#signinForm").on("submit",handleLogin);
+});
+
+$('#homePage').live('pageshow', function(event) {
+    console.log('home page code here');
+});
+
+/*function initUtils() {
     console.log('initUtils fired');
-   $("#logOutBtn").click(handleLogout);
-}
+    checkPreAuth();
+   //$("#logOutBtn").click(handleLogout);
+}*/
+
+/*$(document).bind( 'pagebeforeshow',function(event){
+     console.log('the next page is about to be shown');
+     //initUtils();
+});*/
+

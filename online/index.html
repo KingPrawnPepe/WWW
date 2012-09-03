@@ -3,6 +3,7 @@
 <head>
 <title>Won With Wit - Welcome Page</title>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
+<meta charset="UTF-8">
 
 <link rel="stylesheet" href="public/css/jquery.mobile-1.1.1.min.css" />
 <link rel="stylesheet" href="public/css/screen.css" />
@@ -13,7 +14,7 @@
 
 </head>
 
-<body onload="init()">
+<body onload="test()">
 	<div data-role="page" id="signinUpPage">
 
         <div data-role="header">
@@ -54,12 +55,6 @@
 	    </div><!-- /content -->
 
     </div><!-- /page -->
-
-    <script>
-        $("#signinUpPage").live("pageinit", function(e) {
-            checkPreAuth();
-        });
-    </script>
 </body>
 
 </html>

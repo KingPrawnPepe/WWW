@@ -3,6 +3,7 @@
 <head>
 <title>Won With Wit - Your Home Page</title>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
+<meta charset="UTF-8">
 
 <link rel="stylesheet" href="public/css/jquery.mobile-1.1.1.min.css" />
 <link rel="stylesheet" href="public/css/screen.css" />
@@ -13,7 +14,7 @@
 
 </head>
 
-<body>
+<body onload="test()">
 	<div data-role="page" id="homePage">
 
         <div data-role="header">
@@ -29,10 +30,9 @@
     <script>
         //$(document).ready(initUtils);
 
-        $('#homePage').live( 'pagecreate', function(event){
+        /*$('#homePage').live( 'pagecreate', function(event){
             initUtils();
-        });
-
+        });*/
     </script>
     </div><!-- /page -->
 
