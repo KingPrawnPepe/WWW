@@ -46,7 +46,7 @@ function handleLogin() {
     var u = $("#unameEmail", form).val();
     var p = $("#pword", form).val();
     if(u != '' && p!= '') {
-        $.post(serviceURL +'signIn.php', {username:u,password:p}, function(data) {
+        $.post(serviceURL +'signIn.php', {unameEmail:u,password:p}, function(data) {
             if(data.items.length !== 0) {
                 //store the sign-in check vars
                 window.localStorage["uName"] = data.items[0].uname;
