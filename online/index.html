@@ -27,7 +27,7 @@
 		    <div data-role="collapsible-set">
 	            <div data-role="collapsible" data-collapsed="false">
 	                <h3>Sign In:</h3>
-	                <form action="form.php" method="post" id="signinForm">
+	                <form action="" method="post" id="signinForm">
 	                    <div data-role="fieldcontain">
 	                    	<label for="unameEmail">Username/Email:</label>
 	                    	<input type="text" name="unameEmail" id="unameEmail" value="">
@@ -39,15 +39,18 @@
 	            </div>
 	            <div data-role="collapsible">
 	                <h3>New to the game? Sign Up!</h3>
-	                <form action="form.php" method="post" id="registerForm">
+	                <form action="" method="post" id="registerForm">
 	                    <div data-role="fieldcontain">
-	                    	<label for="email">Your Email:</label>
-	                    	<input type="text" name="email" id="email" value="">
-	                    	<label for="uname">Your Username:</label>
-	                    	<input type="text" name="uname" id="uname" value="">
-	                    	<label for="pword">Create Password:</label>
-	                    	<input type="text" name="pword" id="pword" value="">                   	
+	                    	<label for="newEmail">Your Email:</label>
+	                    	<input type="text" name="newEmail" id="newEmail" class="validInput" value="">
+	                    	<span class="validCheck"></span>
+	                    	<label for="newUname">Your Username:</label>
+	                    	<input type="text" name="newUname" id="newUname" class="validInput" value="">
+	                    	<span class="validCheck"></span>
+	                    	<label for="newPword">Create Password:</label>
+	                    	<input type="text" name="newPword" id="newPword" value="">                   	
 	                    </div>
+	                    <input type="submit" value="Create Account" id="createAccountButton">
 	                </form>
 	            </div>	
             </div>
