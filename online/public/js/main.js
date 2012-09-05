@@ -73,28 +73,25 @@ function handleLogout() {
     $.mobile.changePage("index.html");
 }
 
-function validEmailCheck(event) {
-    var formValue = $(event.target.id);
-    var formName = $(event.target.value);
+function validInputCheck(event) {
+    var formValue = event.target.value;
+    var formName = event.target.id;
     $.post(serviceURL +'validInput.php', {value:formValue,form:formName}, function(data) {
-        if(data.items.length !== 0) {
+        console.log(data);
+        /*if(data.items.length !== 0) {
             //store the sign-in check vars
         } else {
             alert("That username/email is already taken");
             //console.log(data);
-        }
+        }*/
     },"json");    
-}
-
-function validUnameCheck(event) {
-    console.log("uname check = "+event.target.id);
 }
 
 $(document).on('pageshow', '#signinUpPage', function(event) {
     console.log('sign up page run');
     $("#signinForm").on("submit",handleLogin);
-    $("#newEmail").on("change keyup", validEmailCheck);
-    $("#newUname").on("change keyup", validUnameCheck);
+    $("#newEmail").on("change keyup", validInputCheck);
+    $("#newUname").on("change keyup", validInputCheck);
 });
 
 $(document).on('pageshow', '#homePage', function(event) {

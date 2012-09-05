@@ -9,7 +9,7 @@ $pword = $_POST['password'];
 
 if (isset($_POST['unameEmail']) == TRUE && isset($_POST['password']) == TRUE ) {
 
-    $safeUnameEmail = mysql_real_escape_string($unameEmail);
+    //$safeUnameEmail = mysql_real_escape_string($unameEmail);
 	//$safePword = md5($pword) ;
     $sql = "select uname, id " . 
 		"from users where (uname = '$safeUnameEmail' or email = '$safeUnameEmail') and pword = '$pword' " ;
